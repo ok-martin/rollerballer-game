@@ -6,18 +6,25 @@ using UnityEngine.UI;
 public class PlayerController : MonoBehaviour
 {
     public float speed;
+
     public Text countText;
     public Text winText;
 
-    // Use rigidbody for ball physics
     private Rigidbody ballBody;
+    private GameObject[] pickups;
     private int count;
 
     // Initialization
     void Start ()
     {
+        // Use rigidbody for ball physics
         ballBody = GetComponent<Rigidbody>();
-        count = 8;
+
+        // Get all of the pickups in the scene
+        pickups = GameObject.FindGameObjectsWithTag("Pickup");
+
+        // Get the number of pickups
+        count = pickups.Length;
         SetCountText();
         winText.text = "";
     }
