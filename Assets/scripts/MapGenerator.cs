@@ -6,9 +6,11 @@ using UnityEngine;
 public class MapGenerator : MonoBehaviour
 {
     // Map size
-    public int width;
-    public int height;
+    public int width = 50;
+    public int height = 50;
+    public float scale = 1;
 
+    // Map specs
     public string seed = "Bob";
     public bool randomSeed;
 
@@ -19,18 +21,37 @@ public class MapGenerator : MonoBehaviour
     // Binary array for the map (0 clear, 1 wall)
     int[,] map;
 
+    // Object for the bottom / floor 
+    public GameObject floor;
+    public Material floorMaterial;
+
     // Initialization
     void Start()
     {
+        
         GenerateMap();
-	}
+        AddFloor();
+    }
 
     void Update()
     {
-        if (Input.GetMouseButtonDown(0))
-        {
-            GenerateMap();
-        }
+
+    }
+
+    void AddFloor()
+    {
+        // Convert tiles to Unity units
+        float wx = width / 9 * scale;
+        float wy = height / 9 * scale;
+
+        // Set the position for the floor
+        floor.transform.position = new Vector3(0, -4.9F, 0);
+
+        // Scale the floor to the map size
+        floor.transform.localScale = new Vector3(wx, 1F, wy);
+
+        // Scale the floor texture to the floor size
+        floorMaterial.mainTextureScale = new Vector2(wx, wy);
     }
 
     void GenerateMap()
@@ -40,14 +61,12 @@ public class MapGenerator : MonoBehaviour
         // Create the map
         FillMap();
 
-
         // Smooth the map 5 times
         for (int i = 0; i < 5; i++)
         {
             // Smooth the walls of each region
             SmoothMap();
         }
-
 
         // Region Detection: Remove tiny regions (below the treshold count of tiles)
         SmoothRegion(10, 1);
@@ -59,9 +78,10 @@ public class MapGenerator : MonoBehaviour
         Rooms[0].isAccessibleFromMainRoom = true;
         ConnectClosestRooms(Rooms);
 
+        // Genereate mesh for the top and 3D walls
         MeshGenerator meshGen = GetComponent<MeshGenerator>();
-        float size = 1;
-        meshGen.GenerateMesh(map, size);
+        
+        meshGen.GenerateMesh(map, scale);
     }
 
     // Create the map based on the seed. If feed the same seed, it will generate the same map
