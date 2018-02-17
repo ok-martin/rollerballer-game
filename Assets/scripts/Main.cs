@@ -5,6 +5,7 @@ using UnityEngine;
 public class Main : MonoBehaviour
 {
     public GameObject player;
+    public Transform pickup;
 
     private int mapWidth = 0;
     private int mapHeight = 0;
@@ -42,6 +43,28 @@ public class Main : MonoBehaviour
                     x = mapWidth;
                     break;
                 }
+            }
+        }
+        int pickups = 10;
+
+        for (int i = 0; i < pickups; i++)
+        {
+            while(true)
+            {
+                int x = (int)Random.Range(0F, mapWidth);
+                int y = (int)Random.Range(0F, mapHeight);
+
+                if (map[x,y] == 0)
+                {
+                    float[] pos = Map2WorldCoordinates(x, y);
+
+                    // TODO: if -> check if there is no cubes already there!!!!!!
+
+
+                    Instantiate(pickup, new Vector3(pos[0], -4F, pos[1]), Quaternion.identity);
+                    break;
+                }
+                
             }
         }
 
