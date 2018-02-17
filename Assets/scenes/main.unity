@@ -469,7 +469,7 @@ MeshRenderer:
   m_LightProbeUsage: 1
   m_ReflectionProbeUsage: 1
   m_Materials:
-  - {fileID: 10303, guid: 0000000000000000f000000000000000, type: 0}
+  - {fileID: 2100000, guid: e57aa41322800f1478c6eff355de0937, type: 2}
   m_StaticBatchInfo:
     firstSubMesh: 0
     subMeshCount: 0
@@ -535,6 +535,7 @@ MonoBehaviour:
   speed: 20
   countText: {fileID: 1461806977}
   winText: {fileID: 1129142125}
+  playerMaterial: {fileID: 2100000, guid: e57aa41322800f1478c6eff355de0937, type: 2}
 --- !u!54 &242668827
 Rigidbody:
   m_ObjectHideFlags: 0

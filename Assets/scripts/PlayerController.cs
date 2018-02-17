@@ -10,11 +10,27 @@ public class PlayerController : MonoBehaviour
     public Text countText;
     public Text winText;
 
+    public Material playerMaterial;
+
     private Rigidbody ballBody;
     private GameObject[] pickups;
     private int count;
 
     private int[,] map;
+
+    private Color32[] playerColours =
+    {
+        new Color32(255, 228, 225, 1),
+        new Color32(230, 230, 250, 1),
+        new Color32(240, 255, 255, 1),
+        new Color32(131, 139, 131, 1),
+        new Color32(255, 250, 205, 1),
+        new Color32(255, 228, 181, 1),
+        new Color32(255, 218, 185, 1),
+        new Color32(255, 228, 196, 1),
+        new Color32(245, 245, 245, 1),
+        new Color32(205, 201, 201, 1)
+    };
 
     // Initialization
     void Start ()
@@ -54,7 +70,7 @@ public class PlayerController : MonoBehaviour
     {
         // Check if it is the pickup object.
         // Also: Add rigidbody to pickup object. Make it Kinematic.
-        if(other.gameObject.CompareTag("Pickup"))
+        if (other.gameObject.CompareTag("Pickup"))
         {
             // Hide the pickup as opposed to Destroy(other.gameObject);
             other.gameObject.SetActive(false);
@@ -65,8 +81,33 @@ public class PlayerController : MonoBehaviour
         }
     }
 
+    void OnCollisionEnter(Collision collision)
+    {
+        Debug.Log(playerMaterial.color.ToString());
+
+        //Renderer rend = GetComponent<Renderer>(); rend.material.color
+        playerMaterial.color = RandomPlayerColor();
+
+        // Debug-draw all contact points and normals
+        foreach (ContactPoint contact in collision.contacts)
+        {
+            Debug.DrawRay(contact.point, contact.normal, Color.white);
+        }
+
+        // big impact.
+        //if (collision.relativeVelocity.magnitude > 2)
+    }
+
+
+    private Color32 RandomPlayerColor()
+    {
+        int colours = playerColours.Length;
+        int colour = (int)Random.Range(0F, colours);
+        return playerColours[colour];
+    }
+
     // Update the text UI
-    void SetCountText()
+    private void SetCountText()
     {
         countText.text = "Collect: " + count.ToString();
         if (count == 0)

@@ -14,10 +14,10 @@ public class Main : MonoBehaviour
     // Use this for initialization
     void Start ()
     {
-        // Access the map generator
+        // access the map generator
         MapGenerator mpg = GetComponent<MapGenerator>();
 
-        // Create the world
+        // create the world
         mpg.Main();
 
         map = mpg.map;
