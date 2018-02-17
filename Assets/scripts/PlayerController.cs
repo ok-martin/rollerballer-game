@@ -14,6 +14,8 @@ public class PlayerController : MonoBehaviour
     private GameObject[] pickups;
     private int count;
 
+    private int[,] map;
+
     // Initialization
     void Start ()
     {
@@ -27,6 +29,7 @@ public class PlayerController : MonoBehaviour
         count = pickups.Length;
         SetCountText();
         winText.text = "";
+
     }
 	
 	// Update is called once per frame (before rendering a frame)
@@ -71,4 +74,5 @@ public class PlayerController : MonoBehaviour
             winText.text = "You Win!";
         }
     }
+
 }

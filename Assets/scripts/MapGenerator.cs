@@ -19,16 +19,15 @@ public class MapGenerator : MonoBehaviour
     public int fillPercentage;
 
     // Binary array for the map (0 clear, 1 wall)
-    int[,] map;
+    public int[,] map;
 
     // Object for the bottom / floor 
     public GameObject floor;
     public Material floorMaterial;
 
     // Initialization
-    void Start()
+    public void Main()
     {
-        
         GenerateMap();
         AddFloor();
     }
@@ -77,6 +76,7 @@ public class MapGenerator : MonoBehaviour
         Rooms[0].isMainRoom = true;
         Rooms[0].isAccessibleFromMainRoom = true;
         ConnectClosestRooms(Rooms);
+
 
         // Genereate mesh for the top and 3D walls
         MeshGenerator meshGen = GetComponent<MeshGenerator>();
