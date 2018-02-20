@@ -37,7 +37,7 @@ public class Main : MonoBehaviour
                     float[] pos = Map2WorldCoordinates(x, y);
 
                     // move player to a starting location
-                    player.transform.position = new Vector3(pos[0], 0F, pos[1]);
+                    player.transform.position = new Vector3(pos[0], -4.4F, pos[1]);
                     
                     // break
                     x = mapWidth;

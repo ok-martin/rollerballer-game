@@ -35,6 +35,7 @@ public class PlayerController : MonoBehaviour
     // Initialization
     void Start ()
     {
+        
         // Use rigidbody for ball physics
         ballBody = GetComponent<Rigidbody>();
 
@@ -54,6 +55,7 @@ public class PlayerController : MonoBehaviour
     // Called just before any physics calcs
     void FixedUpdate()
     {
+        /*
         // Get current position x and y
         float moveHorizontal = Input.GetAxis("Horizontal");
         float moveVertical = Input.GetAxis("Vertical");
@@ -63,6 +65,7 @@ public class PlayerController : MonoBehaviour
 
         // Push the ball
         ballBody.AddForce(movement * speed);
+        */
     }
 
     // When player object first touches an object collider
